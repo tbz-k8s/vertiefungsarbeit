@@ -2,7 +2,8 @@ apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
 metadata:
   name: web-module-mariadb
-  labels:
+  labels: 
+    tbz-replace-env: MYSQL_ROOT_PASSWORD
     app: mariadb
 spec:
   replicas: 1
@@ -20,6 +21,9 @@ spec:
           ports:
             - containerPort: 3306
               name: mariadb
+          env: 
+          - name: MYSQL_ROOT_PASSWORD
+            value: adminpwspaceholder
 ---
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
