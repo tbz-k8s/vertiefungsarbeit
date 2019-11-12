@@ -27,13 +27,13 @@ spec:
             - containerPort: 8081
               name: apache-zugang
         
-        - image: phpmyadmin:4.8
+        - image: phpmyadmin/phpmyadmin:4.8
           name: phpmyadmin
           ports:
             - containerPort: 8080
               name: phpmyadmin
           
-        - image: beakerx:1.3.0
+        - image: beakerx/beakerx:1.3.0
           name: beakerx
           ports: 
             - containerPort: 80
