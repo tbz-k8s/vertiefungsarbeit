@@ -1,0 +1,60 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: mariadb_data
+  labels:
+    type: local
+spec:
+  storageClassName: local-storage
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/data"
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: apache_data
+  labels:
+    type: local
+spec:
+  storageClassName: local-storage
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/data"
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: phpmyadmin_data
+  labels:
+    type: local
+spec:
+  storageClassName: local-storage
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/data"
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: jupyter_data
+  labels:
+    type: local
+spec:
+  storageClassName: local-storage
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/data"
+---
