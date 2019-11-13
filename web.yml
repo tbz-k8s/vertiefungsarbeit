@@ -1,63 +1,4 @@
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: mariadb_data
-  labels:
-    type: local
-spec:
-  storageClassName: local-storage
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/data"
----
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: apache_data
-  labels:
-    type: local
-spec:
-  storageClassName: local-storage
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/data"
----
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: phpmyadmin_data
-  labels:
-    type: local
-spec:
-  storageClassName: local-storage
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/data"
----
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: jupyter_data
-  labels:
-    type: local
-spec:
-  storageClassName: local-storage
-  capacity:
-    storage: 10Gi
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/data"
----
+       
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
 metadata:
@@ -84,6 +25,11 @@ spec:
           env: 
           - name: MYSQL_ROOT_PASSWORD
             value: adminpwspaceholder
+      # Volumes in Host
+      volumes:
+      - name: "mariadb_data"
+        persistentVolumeClaim:
+         claimName: mariadb_data 
 ---
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
@@ -107,6 +53,11 @@ spec:
           ports:
             - containerPort: 8081
               name: apache-zugang
+      # Volumes in Host
+      volumes:
+      - name: "apache_data"
+        persistentVolumeClaim:
+         claimName: apache_data 
 ---
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
@@ -130,6 +81,11 @@ spec:
           ports:
             - containerPort: 8080
               name: phpmyadmin
+      # Volumes in Host
+      volumes:
+      - name: "phpmyadmin_data"
+        persistentVolumeClaim:
+         claimName: phpmyadmin_data 
 ---
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
@@ -153,4 +109,8 @@ spec:
           ports: 
             - containerPort: 80
               name: beakerx
-
+      # Volumes in Host
+      volumes:
+      - name: "jupyter_data"
+        persistentVolumeClaim:
+         claimName: jupyter_data  

@@ -1,0 +1,58 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: mariadb_data
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+nfs:
+    path: /opt/nfs/maria
+    server: $$$$$$$$$$$$$$$ FQDN NFS CLUSTER $$$$$$$$$$$$$$$$
+    readOnly: false
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: apache_data
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+nfs:
+    path: /opt/nfs/apache
+    server: $$$$$$$$$$$$$$$ FQDN NFS CLUSTER $$$$$$$$$$$$$$$$
+    readOnly: false
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: phpmyadmin_data
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /opt/nfs/phpmyadmin
+    server: $$$$$$$$$$$$$$$ FQDN NFS CLUSTER $$$$$$$$$$$$$$$$
+    readOnly: false
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: jupyter_data
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /opt/nfs/jupyter
+    server: $$$$$$$$$$$$$$$ FQDN NFS CLUSTER $$$$$$$$$$$$$$$$
+    readOnly: false 
+---
