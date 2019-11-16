@@ -10,7 +10,7 @@ Deswegen wurde im Rahmen der Vertiefungsarbeite der TBZ HF ITSE17 eine Variante 
 
 Dieses Repository ist als Erklärung und Anleitung für Lehrpersonen zu verstehen und soll ebenalls den technischen Einblick gewähren um selbst solche Module zu bauen. Dies baut im wesentlichen auf dem M300 von Marcel Bernet auf dem Github Repository https://www.github.com/mc-b dessen Erläuterungen zu Containerisierung und Orchestrierung hier verlinkt sind.  
 
-![StatusQuo]("https://github.com/zoink1989/vertiefungsarbeit/bilder/StatusQuo.png")
+![StatusQuo](https://github.com/zoink1989/vertiefungsarbeit/blob/master/bilder/StatusQuo.png)
 
 ## Technologie 
 
