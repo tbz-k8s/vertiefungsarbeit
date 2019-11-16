@@ -31,6 +31,15 @@ Entsprechend sind alle Lehrpersonen selbst für die bereitstellung der Module au
 
 ![](bilder/semiautomatisiertes_Konzept.png)
 
+1. Modulverantwortlicher bearbeitet das Dockerfile nach Anleitung, testet lokal den Unterrichtsinhalt am neuen File
+2. Upload auf Github des Dockerfiles 
+3. Versionisierung auf GitHub
+4. Erstellen des Images und ablegen auf eigener Registry durch den Modulverantwortlichen
+5. Informieren der Lehrpersonen über neue Version
+6. Kubernetes erstellt ab sofort aus den aktuellen Images die Pods nach Parameter
+7. User können auf die Pods zugreifen
+
+
 ## Lernkube
 
 Die Umgebung auf dem Lernkube (https://github.com/mc-b/lernkube) ist analog der des Kubernetesclusters funktional identisch. Ausnahme hier ist lediglich die Ablage der Daten welche in der Clustervariante schlussendlich auf NFS Ferigaben schrieben und im Lernkube einen Speicherort in der Vagrant Maschine finden. Diese sind abgreif- und veränderbar und unter dem Pfad "/data" auffindbar. 
@@ -41,15 +50,28 @@ Im Gegensatz zum Cluster in dem die Volumes bzw Shares im selben File (https://g
 
 Grundsätzlich brauchen die Systeme welche im Kubernetescluster aufgezogen werden keine Wartung, da diese am Ende der Module einfach gelöscht und auf Knopfdruck wieder neu gebaut werden. 
 
+## Weiterentwicklung und Lifecycle
+
 Einzig die Versionen der Software kann angepasst werden, jedoch ist dies nicht zu unterschätzen da je Abhängigkeiten in Scripts welche den Schülern verteilt werden hier tangiert werden.
 
 Hierzu wurde in Ablauf definiert der durch den Modulverantwortlichen so durchgeführt wird und von den Lehrpersonen gegenprüfen lässt. Da die Changes erst ende Semester angedacht ist, empfiehlt es sich die Änderungen genau zu prüfen. 
 
-![Ablauf Renewal](./bilder/Renewal_Phase-unerwuenscht.png1)
+![Ablauf Renewal](./bilder/Renewal_Phase-unerwuenscht1.png)
 
-## Weiterentwicklung
+Über allen Abläufen gesehen ist der Lifecycle des Systems folgendermassen angedacht: 
+
+![](./bilder/Lifecycle_K8s.png)
+
+1. Unterrichtsinstanzen gemäss Image in Kubernetes erstellen 
+2. Modul durchführen
+3. Modul abschliessen
+4. Unterrichtsinstanzen vernichten
+5. Verbesserungsvorschläge zusammentragen
+6. Anpassungen vornehmen
+7. Anpassungen Testen
+
+
 ### Zuständigkeiten
-### Lifecycle
 
 # Komponenten der Module
 
