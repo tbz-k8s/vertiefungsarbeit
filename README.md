@@ -20,23 +20,41 @@ Zusätzlich zu der Bereitstellung der Software für die praktische Arbeit, wird 
 
 Grundsätzlcih ist es hier auch möglich eine Datenbank im Einführungsteil also zu erstellen, tables zu erstellen und Daten einzufüllen - und zur Kontrolle mit einem phpMyAdmin oder der MySQL Workbench die Auswirkungen live mitzuverfolgen. 
 
-## Komponenten der Module
+# Vogelperspektive Anwendungskonzept
+##  Cluster
 
-### Web
-#### Images
-#### Ports
-#### Volumes
+## Lernkube
+
+## Wartung
+
+## Weiterentwicklung
+### Zuständigkeiten
+### Lifecycle
+
+# Komponenten der Module
+
+## Webtechnologieen
+### Übersicht
+
+| Image        | Software           | Version  | Ports extern  | Volumes       |        Zweck     |
+| ------------ |:------------------:| -------------:|------------------- |:------------------:| ------:|
+| httpd | Apache | 2.4 | 8081 | /usr/local/apache2/htdocs/ | Rootverzeichniss |
+| phpmyadmin/phpmyadmin |  PHPmyAdmin | 4.8 | 8080 | /etc/phpmyadmin/config.user.inc.php | Configfile |
+| beakerx/beakerx | Jupyter / Beakerx | 1.3 | 80 | /mnt/mesos/sandbox  | Notebooks und Einstellungen |
+
 #### Architektur
 
-### DB
 
-#### Images
-#### Ports
-#### Volumes
+## Datenbanken 
+### Übersicht
+
+| Image        | Software           | Version  | Ports extern  | Volumes       |        Zweck     |
+| ------------ |:------------------:| -------------:|------------------- |:------------------:| ------:|
+| httpd | Apache | 2.4 | 8081 | /usr/local/apache2/htdocs/ | Rootverzeichniss |
+| phpmyadmin/phpmyadmin |  PHPmyAdmin | 4.8 | 8080 | /etc/phpmyadmin/config.user.inc.php | Configfile |
+| beakerx/beakerx | Jupyter / Beakerx | 1.3 | 80 | /mnt/mesos/sandbox  | Notebooks und Einstellungen |
+| mariadb/mariadb | MariaDB |4.10.4 | 3306 | /usr/local/mariadb/columnstore | Datenbanken (sowohl intern wie auch extern) |
+
 #### Architektur
 
-| Image        | Software           | Version  | Ports intern  | Ports extern       |  Volumes           | Zweck  |
-| ------------ |:------------------:| -------------:|------------------- |:------------------:| ------:|------:|
-| phpmyadmin/phpmyadmin  | phpMyAdmin | XY |       |   |   |
-| col 2 is      | centered      |   $12 |col 3 is      | right-aligned | $1600 |
-| zebra stripes | are neat      |    $1 |col 3 is      | right-aligned | $1600 |
+# Jupyter / BeakerX
