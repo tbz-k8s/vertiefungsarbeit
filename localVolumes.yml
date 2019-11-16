@@ -11,7 +11,7 @@ spec:
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/data"
+    path: "/data/mariadb"
 ---
 kind: PersistentVolume
 apiVersion: v1
@@ -26,7 +26,7 @@ spec:
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/data"
+    path: "/data/apache"
 ---
 kind: PersistentVolume
 apiVersion: v1
@@ -41,7 +41,7 @@ spec:
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/data"
+    path: "/data/phpmyadmin"
 ---
 kind: PersistentVolume
 apiVersion: v1
@@ -56,5 +56,5 @@ spec:
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/data"
+    path: "/data/jupyter"
 ---

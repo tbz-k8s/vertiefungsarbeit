@@ -45,7 +45,7 @@ Einzig die Versionen der Software kann angepasst werden, jedoch ist dies nicht z
 
 Hierzu wurde in Ablauf definiert der durch den Modulverantwortlichen so durchgeführt wird und von den Lehrpersonen gegenprüfen lässt. Da die Changes erst ende Semester angedacht ist, empfiehlt es sich die Änderungen genau zu prüfen. 
 
-![Ablauf Renewal](.bilder/Renewal_Phase-unerwuenscht.png)
+![Ablauf Renewal](./bilder/Renewal_Phase-unerwuenscht.png)
 
 ## Weiterentwicklung
 ### Zuständigkeiten
