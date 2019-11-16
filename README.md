@@ -12,8 +12,6 @@ Dieses Repository ist als Erklärung und Anleitung für Lehrpersonen zu verstehe
 
 ![StatusQuo](bilder/StatusQuo.png)
 
-
-
 ## Technologie
 
 Die hierfür verwendete Technologie basiert grundlegend auf Containerisierung (https://github.com/mc-b/M300/tree/master/30-Container)  welche mit Orchestrierungssoftware (in diesem Fall Kubernetes (https://github.com/mc-b/M300/tree/master/40-Kubernetes) aufgezogen und betrieben wird. 
