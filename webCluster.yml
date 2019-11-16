@@ -1,4 +1,4 @@
-       
+# Persistent Volumes für die verschiedenen Container
 kind: PersistentVolume
 apiVersion: v1
 metadata:
@@ -57,11 +57,12 @@ spec:
     server: $$$$$$$$$$$$$$$ FQDN NFS CLUSTER $$$$$$$$$$$$$$$$
     readOnly: false 
 ---
+#Container bzw beschriebung der einzelnen Deployments
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
-kind: Deployment
+kind: Deployment #MariaDB Containerbeschreibung
 metadata:
-  name: web-module-mariadb
-  labels: 
+  name: web-module-mariadb 
+  labels: #Variabeln für Erstinitialisierung
     tbz-replace-env: MYSQL_ROOT_PASSWORD
     app: mariadb
 spec:
@@ -75,14 +76,14 @@ spec:
         app: mariadb
     spec:
       containers:
-        - image: mariadb:10.4.10
+        - image: mariadb:10.4.10 #Version des Images für MariaDB
           name: mariadb
           ports:
-            - containerPort: 3306
-              name: mariadb
-          env: 
-          - name: MYSQL_ROOT_PASSWORD
-            value: adminpwspaceholder
+            - containerPort: 3306 #Ports auf denen mariadb ansprechbar ist
+              name: mariadb 
+          env: # Umgebungsvariabeln welche mitgegeben werden
+          - name: MYSQL_ROOT_PASSWORD  #Rootpasswort wird hier vorgemerkt
+            value: adminpwspaceholder #durch die Funktion "adminspwplaceholder" wird ein Zufallswert generiert und hinterlegt. In der Bereitsstellunsgsoftware wird diese Variable per Container angezeigt. 
       # Volumes in Host
       volumes:
       - name: "mariadb_data"
@@ -106,10 +107,10 @@ spec:
         app: apache
     spec:
       containers:
-        - image: httpd:2.4
+        - image: httpd:2.4 #Version des Images für Apache
           name: apache
           ports:
-            - containerPort: 8081
+            - containerPort: 8081 #Ports auf denen Apache ansprechbar ist
               name: apache-zugang
       # Volumes in Host
       volumes:
@@ -134,10 +135,10 @@ spec:
         app: phpmyadmin
     spec:
       containers:
-        - image: phpmyadmin/phpmyadmin:4.8
+        - image: phpmyadmin/phpmyadmin:4.8 #Version des Images für phpmyadmin
           name: phpmyadmin
           ports:
-            - containerPort: 8080
+            - containerPort: 8080 #Ports auf denen phpmyadmin ansprechbar ist
               name: phpmyadmin
       # Volumes in Host
       volumes:
@@ -162,13 +163,13 @@ spec:
         app: beakerx
     spec:
       containers:
-        - image: beakerx/beakerx:1.3.0
+        - image: beakerx/beakerx:1.3.0 #Version des Images für beakerx
           name: beakerx
           ports: 
-            - containerPort: 80
+            - containerPort: 80 #Ports auf denen Beakerx / Jupyter ansprechbar ist
               name: beakerx
       # Volumes in Host
       volumes:
-      - name: "jupyter_data"
-        persistentVolumeClaim:
+      - name: "jupyter_data" # Volumesbeschreibung
+        persistentVolumeClaim: 
          claimName: jupyter_data  
