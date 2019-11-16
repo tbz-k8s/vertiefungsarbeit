@@ -8,12 +8,13 @@ kommt, dass die Vorbereitung von Inhalten abhängig von Technologien und dessen 
 
 Deswegen wurde im Rahmen der Vertiefungsarbeite der TBZ HF ITSE17 eine Variante umgesetzt in der sichergestellt ist das die Bereitstellung der Lernumgebung Fehlerfrei und Einheitlich erfolgt, ohne grossen Aufwand betreiben zu müssen. 
 
-Dieses Repository ist als Erklärung und Anleitung für Lehrpersonen zu verstehen und soll ebenalls den technischen Einblick gewähren um selbst solche Module zu bauen. Dies baut im wesentlichen auf dem M300 von Marcel Bernet auf dem Github Repository https://www.github.com/mc-b dessen Erläuterungen zu Containerisierung und Orchestrierung hier verlinkt sind.  
+Dieses Repository ist als Erklärung und Anleitung für Lehrpersonen zu verstehen und soll ebenalls den technischen Einblick gewähren um selbst solche Module zu bauen. Dies baut im wesentlichen auf dem M300 von Marcel Bernet auf dem Github Repository https://www.github.com/mc-b/lernkube dessen Erläuterungen zu Containerisierung und Orchestrierung hier verlinkt sind.  
 
 ![StatusQuo](bilder/StatusQuo.png)
 
 
-## Technologie 
+
+## Technologie
 
 Die hierfür verwendete Technologie basiert grundlegend auf Containerisierung (https://github.com/mc-b/M300/tree/master/30-Container)  welche mit Orchestrierungssoftware (in diesem Fall Kubernetes (https://github.com/mc-b/M300/tree/master/40-Kubernetes) aufgezogen und betrieben wird. 
 Der Vorteil hier liegt auf der Hand: Die Umgebung welche für die Schüler eingerichtet werden muss, Beispielsweise im einem Datenbank Modul (mit einem Webserver, einer MySQL Datenbank, und einer phpMyAdmin Oberfläche) ist an sich komplett vorgegeben. Die Vorlage hierfür liegt auf einem Repository, in diesem Fall dieser hier, und wird von der Clustern über die Oberfläche einfach angewendet, immer mit der selben Verison inkl. deren Eigenheiten. Das heisst das man den Problemen einer klassischen Schulumgebung in denen jeder Schüler selbst eine XAMPP Version installiert, je nach Zeitpunkt des Download eine Abweichende Version haben könnte.
@@ -25,9 +26,26 @@ Grundsätzlcih ist es hier auch möglich eine Datenbank im Einführungsteil also
 # Vogelperspektive Anwendungskonzept
 ##  Cluster
 
+Auf den Clustern welche der Schule zur Verfügung stehen werden die Lernumgebungen betrieben. Für den Zugang auf die Daten, wie es zB beim Modul der Webentwicklung nützlich ist, wird auf die NFS Freigabe zugegriffen um Dateien zu platzieren die dann durch den Server angezeigt werden. 
+Entsprechend sind alle Lehrpersonen selbst für die bereitstellung der Module auf ihrem Cluster zuständig. Dies ist jedoch durch die Verteifungsarbeit eines anderen Schülers realisiert und vereinfacht. 
+
+![](bilder/semiautomatisiertes_Konzept.png)
+
 ## Lernkube
 
+Die Umgebung auf dem Lernkube (https://github.com/mc-b/lernkube) ist analog der des Kubernetesclusters funktional identisch. Ausnahme hier ist lediglich die Ablage der Daten welche in der Clustervariante schlussendlich auf NFS Ferigaben schrieben und im Lernkube einen Speicherort in der Vagrant Maschine finden. Diese sind abgreif- und veränderbar und unter dem Pfad "/data" auffindbar. 
+
+Im Gegensatz zum Cluster in dem die Volumes bzw Shares im selben File (https://github.com/zoink1989/vertiefungsarbeit/web.yml) beschrieben ist, ist dies in der lokalen Variante verschieden. Hier sind die Persistant Volumes in einer eigenen YAML-Datei (https://github.com/zoink1989/vertiefungsarbeit/localVolumes.yml) hinterlegt und die Anleitung für die weiteren Deployments in der entsprechenden Datei localVolumes.yml (https://github.com/zoink1989/vertiefungsarbeit/localVolumes.yml).
+
 ## Wartung
+
+Grundsätzlich brauchen die Systeme welche im Kubernetescluster aufgezogen werden keine Wartung, da diese am Ende der Module einfach gelöscht und auf Knopfdruck wieder neu gebaut werden. 
+
+Einzig die Versionen der Software kann angepasst werden, jedoch ist dies nicht zu unterschätzen da je Abhängigkeiten in Scripts welche den Schülern verteilt werden hier tangiert werden.
+
+Hierzu wurde in Ablauf definiert der durch den Modulverantwortlichen so durchgeführt wird und von den Lehrpersonen gegenprüfen lässt. Da die Changes erst ende Semester angedacht ist, empfiehlt es sich die Änderungen genau zu prüfen. 
+
+![Ablauf Renewal](.bilder/Renewal_Phase-unerwuenscht.png)
 
 ## Weiterentwicklung
 ### Zuständigkeiten
