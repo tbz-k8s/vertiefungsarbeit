@@ -42,7 +42,9 @@ Entsprechend sind alle Lehrpersonen selbst für die bereitstellung der Module au
 
 Die Umgebung auf dem Lernkube (https://github.com/mc-b/lernkube) ist analog der des Kubernetesclusters funktional identisch. Ausnahme hier ist lediglich die Ablage der Daten welche in der Clustervariante schlussendlich auf NFS Ferigaben schrieben und im Lernkube einen Speicherort in der Vagrant Maschine finden. Diese sind abgreif- und veränderbar und unter dem Pfad "/data" auffindbar. 
 
-Im Gegensatz zum Cluster in dem die Volumes bzw Shares im selben File (https://github.com/zoink1989/vertiefungsarbeit/web.yml) beschrieben ist, ist dies in der lokalen Variante verschieden. Hier sind die Persistant Volumes in einer eigenen YAML-Datei (https://github.com/zoink1989/vertiefungsarbeit/localVolumes.yml) hinterlegt und die Anleitung für die weiteren Deployments in der entsprechenden Datei localVolumes.yml (https://github.com/zoink1989/vertiefungsarbeit/localVolumes.yml).
+Im Gegensatz zum Cluster in dem die Volumes bzw Shares im selben File (https://github.com/zoink1989/vertiefungsarbeit/blob/master/web.yml) beschrieben ist, ist dies in der lokalen Variante verschieden. 
+
+Hier sind die Persistant Volumes in einer eigenen YAML-Datei (https://github.com/zoink1989/vertiefungsarbeit/blob/master/localVolumes.yml) hinterlegt und die Anleitung für die weiteren Deployments in der entsprechenden Datei web.yml (https://github.com/zoink1989/vertiefungsarbeit/blob/master/web.yml).
 
 ## Wartung
 
@@ -54,7 +56,7 @@ Einzig die Versionen der Software kann angepasst werden, jedoch ist dies nicht z
 
 Hierzu wurde in Ablauf definiert der durch den Modulverantwortlichen so durchgeführt wird und von den Lehrpersonen gegenprüfen lässt. Da die Changes erst ende Semester angedacht ist, empfiehlt es sich die Änderungen genau zu prüfen. 
 
-![Ablauf Renewal](./bilder/Renewal_Phase-unerwuenscht1.png)
+![Ablauf Renewal](bilder/Renewal_Phase-unerwuenscht1.png)
 
 Über allen Abläufen gesehen ist der Lifecycle des Systems folgendermassen angedacht: 
 
