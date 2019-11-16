@@ -85,10 +85,14 @@ spec:
           - name: MYSQL_ROOT_PASSWORD  #Rootpasswort wird hier vorgemerkt
             value: adminpwspaceholder #durch die Funktion "adminspwplaceholder" wird ein Zufallswert generiert und hinterlegt. In der Bereitsstellunsgsoftware wird diese Variable per Container angezeigt. 
       # Volumes in Host
+          volumeMounts:
+          - name: "mariadb_data"
+            mountPath: /usr/local/mariadb/    
+            #Assoziierung des internen Speicherpfades auf den Claim
       volumes:
       - name: "mariadb_data"
         persistentVolumeClaim:
-         claimName: mariadb_data 
+         claimName: mariadb_data #Verweis auf den PersistentVolume
 ---
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
@@ -112,11 +116,15 @@ spec:
           ports:
             - containerPort: 8081 #Ports auf denen Apache ansprechbar ist
               name: apache-zugang
-      # Volumes in Host
+          # Volumes in Host
+          volumeMounts:
+          - name: "apache_data"
+            mountPath: /usr/local/apache2/htdocs/ #Rootverzeichniss
+            #Assoziierung des internen Speicherpfades auf den Claim
       volumes:
       - name: "apache_data"
         persistentVolumeClaim:
-         claimName: apache_data 
+         claimName: apache_data #Verweis auf den PersistentVolume
 ---
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
@@ -140,11 +148,17 @@ spec:
           ports:
             - containerPort: 8080 #Ports auf denen phpmyadmin ansprechbar ist
               name: phpmyadmin
+          env: 
+            - name: PMA_HOST #definieren der MriaDB Server Adresse, hier mit internem DNS Namen
+              value: "mariadb"
       # Volumes in Host
+          volumeMounts:
+          - name: "phpmyadmin_data"
+            mountPath: /etc/phpmyadmin/config.user.inc.php     # Configfile siehe https://hub.docker.com/r/phpmyadmin/phpmyadmin/ 
       volumes:
       - name: "phpmyadmin_data"
         persistentVolumeClaim:
-         claimName: phpmyadmin_data 
+         claimName: phpmyadmin_data  #Verweis auf den PersistentVolume
 ---
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
@@ -163,12 +177,15 @@ spec:
         app: beakerx
     spec:
       containers:
-        - image: beakerx/beakerx:1.3.0 #Version des Images für beakerx
+        - image:  :1.3.0 #Version des Images für beakerx
           name: beakerx
           ports: 
             - containerPort: 80 #Ports auf denen Beakerx / Jupyter ansprechbar ist
               name: beakerx
-      # Volumes in Host
+      # Volumes in Host          
+      volumeMounts:
+          - name: "jupyter_data"
+            mountPath: /mnt/mesos/sandbox    #Notebooks und Settings
       volumes:
       - name: "jupyter_data" # Volumesbeschreibung
         persistentVolumeClaim: 
