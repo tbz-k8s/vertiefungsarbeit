@@ -1,0 +1,174 @@
+       
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: mariadb_data
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+nfs:
+    path: /opt/nfs/maria
+    server: $$$$$$$$$$$$$$$ FQDN NFS CLUSTER $$$$$$$$$$$$$$$$
+    readOnly: false
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: apache_data
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+nfs:
+    path: /opt/nfs/apache
+    server: $$$$$$$$$$$$$$$ FQDN NFS CLUSTER $$$$$$$$$$$$$$$$
+    readOnly: false
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: phpmyadmin_data
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /opt/nfs/phpmyadmin
+    server: $$$$$$$$$$$$$$$ FQDN NFS CLUSTER $$$$$$$$$$$$$$$$
+    readOnly: false
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: jupyter_data
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /opt/nfs/jupyter
+    server: $$$$$$$$$$$$$$$ FQDN NFS CLUSTER $$$$$$$$$$$$$$$$
+    readOnly: false 
+---
+apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: web-module-mariadb
+  labels: 
+    tbz-replace-env: MYSQL_ROOT_PASSWORD
+    app: mariadb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mariadb
+  template:
+    metadata:
+      labels:
+        app: mariadb
+    spec:
+      containers:
+        - image: mariadb:10.4.10
+          name: mariadb
+          ports:
+            - containerPort: 3306
+              name: mariadb
+          env: 
+          - name: MYSQL_ROOT_PASSWORD
+            value: adminpwspaceholder
+      # Volumes in Host
+      volumes:
+      - name: "mariadb_data"
+        persistentVolumeClaim:
+         claimName: mariadb_data 
+---
+apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: web-module-apache
+  labels:
+    app: apache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apache
+  template:
+    metadata:
+      labels:
+        app: apache
+    spec:
+      containers:
+        - image: httpd:2.4
+          name: apache
+          ports:
+            - containerPort: 8081
+              name: apache-zugang
+      # Volumes in Host
+      volumes:
+      - name: "apache_data"
+        persistentVolumeClaim:
+         claimName: apache_data 
+---
+apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: web-module-phpmyadmin
+  labels:
+    app: phpmyadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin
+    spec:
+      containers:
+        - image: phpmyadmin/phpmyadmin:4.8
+          name: phpmyadmin
+          ports:
+            - containerPort: 8080
+              name: phpmyadmin
+      # Volumes in Host
+      volumes:
+      - name: "phpmyadmin_data"
+        persistentVolumeClaim:
+         claimName: phpmyadmin_data 
+---
+apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: web-module-beakerx
+  labels:
+    app: beakerx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: beakerx
+  template:
+    metadata:
+      labels:
+        app: beakerx
+    spec:
+      containers:
+        - image: beakerx/beakerx:1.3.0
+          name: beakerx
+          ports: 
+            - containerPort: 80
+              name: beakerx
+      # Volumes in Host
+      volumes:
+      - name: "jupyter_data"
+        persistentVolumeClaim:
+         claimName: jupyter_data  
