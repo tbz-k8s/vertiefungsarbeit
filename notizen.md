@@ -662,3 +662,46 @@ dem Docker CLI, einem Command Line Tool, das das API verwendet, um alle Funktion
 <br>
 <img src="bilder/docker-5.png" alt="Docker Architektur" style="float: center" />   
 
+Sicherheit
+===
+
+## Grundsätzlich wichtige Ansätze
+* Quelle des Image sollte vertrauenwürdig sein
+
+* Software in Images sollte aktuell sein, damit nicht bekannte Lücken genutzt werden können
+
+
+
+## Least Privilege 
+
+Der Container sollte möglichst wenig und mit möglichst eingeschränkten Rechten arbeiten können. Um dies zu erreichen kann man folgende Massnahmen treffen:
+
+* ... Sicherstellen, dass Prozesse in Containern nicht als root laufen, sodass das Ausnutzen von Sicherheitslücken in einem Prozess, dem Angreifer keine root-Berechtigungen geben.
+
+* ... Dateisysteme schreibgeschützt einsetzen, sodass Angreifer keine Daten überschreiben oder böswillige Skripten speichern können.
+
+* ... Kernel-Aufrufe, die ein Container ausführen kann, einschränken, um die Angriffsoberfläche zu verringern.
+
+* ... Ressourcen begrenzen, die ein Container nutzen kann, um DoS-Angriffe zu verhindern, bei denen ein kompromittierter Container oder eine Anwendung so viele Ressourcen aufbraucht (wie z.B. Speicher oder CPU-Zeit), sodass der Host zum Halten kommt.
+
+## Weitere Sicherhehitsmassnahmen
+
+
+* Die Container laufen in einer VM oder auf einem dedizierten Host, um zu vermeiden, dass andere Benutzer oder Services angegriffen werden können.
+* Der Load Balancer / Reverse-Proxy ist der einzige Container, der einen Port nach aussen freigibt, wodurch viel Angriffsfläche verschwindet. Monitoring oder Logging-Services sollten über private Schnittstellen oder VPN nutzbar sein.
+* Alle Images definieren einen Benutzer und laufen nicht als root.
+* Alle Images werden über den eigenen Hash heruntergeladen oder auf anderem Wege sicher erhalten und verifiziert.
+* Die Anwendung wird überwacht und es wird Alarm ausgelöst, wenn eine ungewöhnliche Netzwerklast oder auffällige Zugriffsmuster erkannt werden.
+* Alle Container laufen mit aktueller Software und im Produktivmodus – Debug-Informationen sind abgeschaltet.
+* AppArmor oder SELinux sind auf dem Host aktiviert
+* Services wie z.B. Apache, Mysql ist mir irgendeiner Form der Zugriffskontrolle oder einem Passwortschutz ausgestattet.
+* Unnötige setuid-Binaries werden aus den identidock-Images entfernt. Damit verringert sich das Risiko, dass Angreifer, die Zugriff auf einen Container erhalten haben, ihre Berechtigungen erweitern können.
+* Dateisysteme werden so weit wie möglich schreibgeschützt eingesetzt.
+* Nicht benötigte Kernel-Berechtigungen werden so weit wie möglich entfernt.
+
+Besonders gefärdete Container sollten zusätzlich folgenden Massnahmen unterzogen werden: 
+
+* Der Speicher für jeden Container wird durch das Flag -m begrenzt. Damit werden ein paar DoS-Angriffe und Speicherlecks eingedämmt. Die Container müssen dabei entweder per Profiler analysiert werden oder man gibt sehr grosszügige Speichergrenzen vor.
+* SELinux mit speziellen Typen für die Container ausführen. Das kann eine sehr effektive Sicherheitsmassnahme sein, aber sie erfordert einiges an Arbeit.
+* Ein ulimit auf die Anzahl der Prozesse anwenden. Diese Grenze ist für den Benutzer des Containers gültig, daher kann es schwieriger einzusetzen sein, als man denkt. So vermeidet man die Gefahr von Fork-Bomben, die als DoSAngriff eingesetzt werden.
+* Interne Kommunikation wird verschlüsselt, so dass es für Angreifer schwieriger wird, die Daten zu beeinflussen.
