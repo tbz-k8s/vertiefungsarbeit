@@ -121,13 +121,14 @@ spec:
       containers:
         - image:  :1.3.0 #Version des Images für beakerx
           name: beakerx
+          command: [ "start-notebook.sh", "--NotebookApp.token=''" ]
           ports: 
             - containerPort: 80 #Ports auf denen Beakerx / Jupyter ansprechbar ist
               name: beakerx
       # Volumes in Host          
       volumeMounts:
           - name: "jupyter_data"
-            mountPath: /mnt/mesos/sandbox    #Notebooks und Settings
+            mountPath: /home/beakerx/work    #Notebooks und Settings
       volumes:
       - name: "jupyter_data" # Volumesbeschreibung
         persistentVolumeClaim: 
