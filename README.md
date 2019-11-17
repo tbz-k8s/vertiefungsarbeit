@@ -56,6 +56,7 @@ Einzig die Versionen der Software kann angepasst werden, jedoch ist dies nicht z
 
 Hierzu wurde in Ablauf definiert der durch den Modulverantwortlichen so durchgeführt wird und von den Lehrpersonen gegenprüfen lässt. Da die Changes erst ende Semester angedacht ist, empfiehlt es sich die Änderungen genau zu prüfen. 
 
+
 ![Ablauf Renewal](bilder/Renewal_Phase-unerwuenscht1.png)
 
 Über allen Abläufen gesehen ist der Lifecycle des Systems folgendermassen angedacht: 
@@ -86,6 +87,10 @@ Hierzu wurde in Ablauf definiert der durch den Modulverantwortlichen so durchgef
 
 #### Architektur
 
+Konzeptionell sieht das Modul folgendermassen aus. 
+![](bilder/Übersicht_Schülerumgebung_WEB.png)
+
+Aufgrund der praktischen Umsetzung des Zugriffs auf die Datenablage, empfiehlt es sich die produktiven Teile der Aufgaben wie Beispielsweise entwickeln und testen von PHP Code auf dem lokalen Lernkube. Der lokale Pfad für den Austausch der Daten, explizit der "htdoc" Grundordner lautet: "/data/apache" im Lernkube.
 
 ## Datenbanken 
 ### Übersicht
@@ -99,4 +104,15 @@ Hierzu wurde in Ablauf definiert der durch den Modulverantwortlichen so durchgef
 
 #### Architektur
 
+
+Konzeptionell sieht das Modul folgendermassen aus. 
+![](bilder/Übersicht_Schülerumgebung_DB.png)
+
 # Jupyter / BeakerX
+
+Eine Anwendung die wohl für alle komplett neu sein dürfte ist Jupyter Notebook. Jupyter ist eine Anwendung welche für 
+
+
+https://jupyter-notebook.readthedocs.io/en/stable/
+https://github.com/twosigma/beakerx
+SQL https://github.com/twosigma/beakerx/blob/69cf4d47d623dcb10087d6962808d020b9bf01f9/doc/sql/Sql.ipynb

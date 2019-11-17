@@ -185,7 +185,7 @@ spec:
       # Volumes in Host          
       volumeMounts:
           - name: "jupyter_data"
-            mountPath: /mnt/mesos/sandbox    #Notebooks und Settings
+            mountPath: /home/beakerx/work    #Notebooks und Settings
       volumes:
       - name: "jupyter_data" # Volumesbeschreibung
         persistentVolumeClaim: 
