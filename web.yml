@@ -28,13 +28,13 @@ spec:
             value: adminpwspaceholder #durch die Funktion "adminspwplaceholder" wird ein Zufallswert generiert und hinterlegt. In der Bereitsstellunsgsoftware wird diese Variable per Container angezeigt. 
       # Volumes in Host
           volumeMounts:
-          - name: "mariadb_data"
+          - name: "mariadb-data"
             mountPath: /usr/local/mariadb/    
             #Assoziierung des internen Speicherpfades auf den Claim
       volumes:
-      - name: "mariadb_data"
+      - name: "mariadb-data"
         persistentVolumeClaim:
-         claimName: mariadb_data #Verweis auf den PersistentVolume
+         claimName: mariadb-data #Verweis auf den PersistentVolume
 ---
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
@@ -60,13 +60,13 @@ spec:
               name: apache-zugang
           # Volumes in Host
           volumeMounts:
-          - name: "apache_data"
+          - name: "apache-data"
             mountPath: /usr/local/apache2/htdocs/ #Rootverzeichniss
             #Assoziierung des internen Speicherpfades auf den Claim
       volumes:
-      - name: "apache_data"
+      - name: "apache-data"
         persistentVolumeClaim:
-         claimName: apache_data #Verweis auf den PersistentVolume
+         claimName: apache-data #Verweis auf den PersistentVolume
 ---
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
@@ -95,12 +95,12 @@ spec:
               value: "mariadb"
       # Volumes in Host
           volumeMounts:
-          - name: "phpmyadmin_data"
+          - name: "phpmyadmin-data"
             mountPath: /etc/phpmyadmin/config.user.inc.php     # Configfile siehe https://hub.docker.com/r/phpmyadmin/phpmyadmin/ 
       volumes:
-      - name: "phpmyadmin_data"
+      - name: "phpmyadmin-data"
         persistentVolumeClaim:
-         claimName: phpmyadmin_data  #Verweis auf den PersistentVolume
+         claimName: phpmyadmin-data  #Verweis auf den PersistentVolume
 ---
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
@@ -127,9 +127,9 @@ spec:
               name: beakerx
       # Volumes in Host          
       volumeMounts:
-          - name: "jupyter_data"
+          - name: "jupyter-data"
             mountPath: /home/beakerx/work    #Notebooks und Settings
       volumes:
-      - name: "jupyter_data" # Volumesbeschreibung
+      - name: "jupyter-data" # Volumesbeschreibung
         persistentVolumeClaim: 
-         claimName: jupyter_data  
+         claimName: jupyter-data  
