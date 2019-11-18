@@ -2,7 +2,7 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: mariadb_data
+  name: mariadb-data
 spec:
   capacity:
     storage: 1Gi
@@ -10,14 +10,14 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
 nfs:
-    path: /opt/nfs/maria
+    path: /mnt/nfs/maria
     server: $$$$$$$$$$$$$$$ FQDN NFS CLUSTER $$$$$$$$$$$$$$$$
     readOnly: false
 ---
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: apache_data
+  name: apache-data
 spec:
   capacity:
     storage: 1Gi
@@ -25,46 +25,95 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
 nfs:
-    path: /opt/nfs/apache
+    path: /mnt/nfs/apache
     server: $$$$$$$$$$$$$$$ FQDN NFS CLUSTER $$$$$$$$$$$$$$$$
     readOnly: false
 ---
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: phpmyadmin_data
+  name: phpmyadmin-data
 spec:
   capacity:
     storage: 1Gi
   accessModes:
     - ReadWriteMany
   nfs:
-    path: /opt/nfs/phpmyadmin
+    path: /mnt/nfs/phpmyadmin
     server: $$$$$$$$$$$$$$$ FQDN NFS CLUSTER $$$$$$$$$$$$$$$$
     readOnly: false
 ---
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: jupyter_data
+  name: jupyter-data
 spec:
   capacity:
     storage: 10Gi
   accessModes:
     - ReadWriteMany
   nfs:
-    path: /opt/nfs/jupyter
+    path: /mnt/nfs/jupyter
     server: $$$$$$$$$$$$$$$ FQDN NFS CLUSTER $$$$$$$$$$$$$$$$
     readOnly: false 
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mariadb-data
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jupyter-data
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: phpmyadmin-data
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: apache-data
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
 ---
 #Container bzw beschriebung der einzelnen Deployments
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment #MariaDB Containerbeschreibung
 metadata:
   name: web-module-mariadb 
-  labels: #Variabeln für Erstinitialisierung
+  annotations: #Variabeln für Erstinitialisierung
     tbz-replace-env: MYSQL_ROOT_PASSWORD
-    app: mariadb
+  labels:
+  app: mariadb
 spec:
   replicas: 1
   selector:
@@ -86,13 +135,13 @@ spec:
             value: adminpwspaceholder #durch die Funktion "adminspwplaceholder" wird ein Zufallswert generiert und hinterlegt. In der Bereitsstellunsgsoftware wird diese Variable per Container angezeigt. 
       # Volumes in Host
           volumeMounts:
-          - name: "mariadb_data"
+          - name: "mariadb-data"
             mountPath: /usr/local/mariadb/    
             #Assoziierung des internen Speicherpfades auf den Claim
       volumes:
-      - name: "mariadb_data"
+      - name: "mariadb-data"
         persistentVolumeClaim:
-         claimName: mariadb_data #Verweis auf den PersistentVolume
+        claimName: mariadb-data #Verweis auf den PersistentVolume
 ---
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
@@ -118,13 +167,13 @@ spec:
               name: apache-zugang
           # Volumes in Host
           volumeMounts:
-          - name: "apache_data"
+          - name: "apache-data"
             mountPath: /usr/local/apache2/htdocs/ #Rootverzeichniss
             #Assoziierung des internen Speicherpfades auf den Claim
       volumes:
-      - name: "apache_data"
+      - name: "apache-data"
         persistentVolumeClaim:
-         claimName: apache_data #Verweis auf den PersistentVolume
+        claimName: apache-data #Verweis auf den PersistentVolume
 ---
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
@@ -153,12 +202,12 @@ spec:
               value: "mariadb"
       # Volumes in Host
           volumeMounts:
-          - name: "phpmyadmin_data"
+          - name: "phpmyadmin-data"
             mountPath: /etc/phpmyadmin/config.user.inc.php     # Configfile siehe https://hub.docker.com/r/phpmyadmin/phpmyadmin/ 
       volumes:
-      - name: "phpmyadmin_data"
+      - name: "phpmyadmin-data"
         persistentVolumeClaim:
-         claimName: phpmyadmin_data  #Verweis auf den PersistentVolume
+        claimName: phpmyadmin-data  #Verweis auf den PersistentVolume
 ---
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
@@ -184,9 +233,9 @@ spec:
               name: beakerx
       # Volumes in Host          
       volumeMounts:
-          - name: "jupyter_data"
+          - name: "jupyter-data"
             mountPath: /home/beakerx/work    #Notebooks und Settings
       volumes:
-      - name: "jupyter_data" # Volumesbeschreibung
+      - name: "jupyter-data" # Volumesbeschreibung
         persistentVolumeClaim: 
-         claimName: jupyter_data  
+         claimName: jupyter-data  
