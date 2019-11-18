@@ -119,7 +119,7 @@ spec:
         app: beakerx
     spec:
       containers:
-        - image:  beakerx/beakerx:1.3.0 #Version des Images für beakerx
+        - image:  dqgaetan/beakerx:1.0 #Version des Images für beakerx
           name: beakerx
           command: [ "start-notebook.sh", "--NotebookApp.token=''" ]
           ports: 
