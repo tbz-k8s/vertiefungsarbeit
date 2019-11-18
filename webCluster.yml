@@ -237,7 +237,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: Beakerx
+  name: beakerx
 spec:
   selector:
     app: beakerx
@@ -273,7 +273,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: Apache
+  name: apache
 spec:
   selector:
     app: apache
@@ -281,4 +281,4 @@ spec:
     - protocol: TCP
       port: 8081
       targetPort: 8081
-      
+
