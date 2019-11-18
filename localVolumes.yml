@@ -3,7 +3,7 @@ apiVersion: v1
 metadata:
   name: mariadb-data
   labels:
-    type:   
+    type: local
 spec:
   capacity:
     storage: 1Gi
