@@ -34,7 +34,7 @@ spec:
       volumes:
       - name: "mariadb-data"
         persistentVolumeClaim:
-        claimName: mariadb-data #Verweis auf den PersistentVolume
+          claimName: mariadb-data #Verweis auf den PersistentVolume
 ---
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
@@ -66,7 +66,7 @@ spec:
       volumes:
       - name: "apache-data"
         persistentVolumeClaim:
-        claimName: apache-data #Verweis auf den PersistentVolume
+          claimName: apache-data #Verweis auf den PersistentVolume
 ---
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
@@ -100,7 +100,7 @@ spec:
       volumes:
       - name: "phpmyadmin-data"
         persistentVolumeClaim:
-        claimName: phpmyadmin-data  #Verweis auf den PersistentVolume
+          claimName: phpmyadmin-data  #Verweis auf den PersistentVolume
 ---
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
@@ -132,4 +132,4 @@ spec:
       volumes:
       - name: "jupyter-data" # Volumesbeschreibung
         persistentVolumeClaim: 
-        claimName: jupyter-data  
+          claimName: jupyter-data  
