@@ -125,8 +125,8 @@ spec:
           ports: 
             - containerPort: 80 #Ports auf denen Beakerx / Jupyter ansprechbar ist
               name: beakerx
-      # Volumes in Host          
-      volumeMounts:
+          # Volumes in Host          
+          volumeMounts:
           - name: "jupyter-data"
             mountPath: /home/beakerx/work    #Notebooks und Settings
       volumes:
