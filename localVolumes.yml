@@ -3,9 +3,8 @@ apiVersion: v1
 metadata:
   name: mariadb-data
   labels:
-    type: local
+    type:   
 spec:
-  storageClassName: local-storage
   capacity:
     storage: 1Gi
   accessModes:
@@ -20,7 +19,6 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: local-storage
   capacity:
     storage: 1Gi
   accessModes:
@@ -35,7 +33,6 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: local-storage
   capacity:
     storage: 1Gi
   accessModes:
@@ -50,7 +47,6 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: local-storage
   capacity:
     storage: 10Gi
   accessModes:
@@ -63,7 +59,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: mariadb-data
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
@@ -75,7 +70,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: jupyter-data
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
@@ -87,7 +81,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: phpmyadmin-data
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
@@ -99,7 +92,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: apache-data
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
