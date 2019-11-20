@@ -20,7 +20,16 @@ spec:
           ports:
             - containerPort: 3306 #Ports auf denen MariaDB ansprechbar ist
               name: maria-zugang
-          # Volumes in Container
+          env: 
+          - name: MYSQL_DATABASE
+            value: db
+          - name: MYSQL_ROOT_PASSWORD
+            value: beakerx
+          - name: MYSQL_USER
+            value: beakerx
+          - name: MYSQL_PASSWORD
+            value: beakerx
+            # Volumes in Container
           volumeMounts:
             - mountPath: / #Rootverzeichniss
               subPath: mariadb  
