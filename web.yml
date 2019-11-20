@@ -1,28 +1,4 @@
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: data-volume
-  labels:
-    type: local
-spec:
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/data/"
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: data-claim
-spec:
-  storageClassName: manual
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 3Gi
+
 ---
 #Container bzw beschriebung der einzelnen Deployments
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1

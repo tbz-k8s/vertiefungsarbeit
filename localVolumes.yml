@@ -1,49 +1,7 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: mariadb-data
-  labels:
-    type: local
-spec:
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/data/mariadb"
----
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: apache-data
-  labels:
-    type: local
-spec:
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/data/apache"
----
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: phpmyadmin-data
-  labels:
-    type: local
-spec:
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/data/phpmyadmin"
----
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: jupyter-data
+  name: data-volume
   labels:
     type: local
 spec:
@@ -52,7 +10,7 @@ spec:
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/data/jupyter"
+    path: "/data/"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -61,7 +19,7 @@ metadata:
 spec:
   storageClassName: manual
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 3Gi
@@ -73,7 +31,7 @@ metadata:
 spec:
   storageClassName: manual
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 3Gi
@@ -85,7 +43,7 @@ metadata:
 spec:
   storageClassName: manual
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 3Gi
@@ -97,7 +55,7 @@ metadata:
 spec:
   storageClassName: manual
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 3Gi
