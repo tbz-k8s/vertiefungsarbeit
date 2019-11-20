@@ -1,7 +1,7 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: mariadb-data
+  name: data-volume
   labels:
     type: local
 spec:
@@ -10,97 +10,23 @@ spec:
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/data/mariadb"
+    path: "/data/"
 ---
-kind: PersistentVolume
 apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
-  name: apache-data
-  labels:
-    type: local
+  name: data-claim
 spec:
-  capacity:
-    storage: 1Gi
+  storageClassName: manual
   accessModes:
     - ReadWriteMany
-  hostPath:
-    path: "/data/apache"
----
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: phpmyadmin-data
-  labels:
-    type: local
-spec:
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/data/phpmyadmin"
----
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: jupyter-data
-  labels:
-    type: local
-spec:
-  capacity:
-    storage: 10Gi
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/data/jupyter"
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mariadb-data
-spec:
-  storageClassName: manual
-  accessModes:
-    - ReadWriteOnce
   resources:
     requests:
       storage: 3Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: jupyter-data
-spec:
-  storageClassName: manual
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 3Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: phpmyadmin-data
-spec:
-  storageClassName: manual
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 3Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: apache-data
-spec:
-  storageClassName: manual
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 3Gi
+  volumes:
+  - name: web-storage
+  persistentVolumeClaim: 
+  claimName: data-claim
 ---
 #Container bzw beschriebung der einzelnen Deployments
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
@@ -132,12 +58,14 @@ spec:
       # Volumes in Host
           volumeMounts:
           - name: "mariadb-data"
-            mountPath: /usr/local/mariadb/    
+            mountPath: /usr/local/mariadb/
+            subPath: mariadb    
             #Assoziierung des internen Speicherpfades auf den Claim
       volumes:
       - name: "mariadb-data"
         persistentVolumeClaim:
           claimName: data-claim #Verweis auf den PersistentVolume
+          subPath: mariadb
 ---
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
@@ -168,8 +96,9 @@ spec:
             #Assoziierung des internen Speicherpfades auf den Claim
       volumes:
       - name: "apache-data"
-        persistentVolumeClaim:
-          claimName: data-claim #Verweis auf den PersistentVolume
+      persistentVolumeClaim:
+        claimName: data-claim #Verweis auf den PersistentVolume
+        subPath: apache
 ---
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
@@ -204,6 +133,7 @@ spec:
       - name: "phpmyadmin-data"
         persistentVolumeClaim:
           claimName: data-claim  #Verweis auf den PersistentVolume
+          subPath: phpmyadmin
 ---
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
@@ -235,4 +165,5 @@ spec:
       volumes:
       - name: "jupyter-data" # Volumesbeschreibung
         persistentVolumeClaim: 
-          claimName: data-claim  
+          claimName: data-claim 
+          subPath: jupyter

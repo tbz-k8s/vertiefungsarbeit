@@ -59,6 +59,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: mariadb-data
 spec:
+  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
@@ -70,6 +71,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: jupyter-data
 spec:
+  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
@@ -81,6 +83,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: phpmyadmin-data
 spec:
+  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
@@ -92,6 +95,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: apache-data
 spec:
+  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
