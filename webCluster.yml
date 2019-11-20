@@ -57,10 +57,10 @@ spec:
             - name: PMA_HOST #definieren der MriaDB Server Adresse, hier mit internem DNS Namen
               value: "mariadb"
       # Volumes in Container
-      volumeMounts:
-      - mountPath: /etc/phpmyadmin/config.user.inc.php     # Configfile siehe https://hub.docker.com/r/phpmyadmin/phpmyadmin/ 
-        subPath: myphpadmin
-        name: phpmyadmin-data 
+          volumeMounts:
+            - mountPath: /etc/phpmyadmin/config.user.inc.php     # Configfile siehe https://hub.docker.com/r/phpmyadmin/phpmyadmin/ 
+              subPath: myphpadmin
+              name: phpmyadmin-data 
       #Volumes in Host
       volumes:
       - name: phpmyadmin-data
