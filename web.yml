@@ -1,3 +1,106 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: mariadb-data
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/data/mariadb"
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: apache-data
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/data/apache"
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: phpmyadmin-data
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/data/phpmyadmin"
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: jupyter-data
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/data/jupyter"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mariadb-data
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jupyter-data
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: phpmyadmin-data
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: apache-data
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
 ---
 #Container bzw beschriebung der einzelnen Deployments
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
@@ -34,7 +137,7 @@ spec:
       volumes:
       - name: "mariadb-data"
         persistentVolumeClaim:
-          claimName: mariadb-data #Verweis auf den PersistentVolume
+          claimName: data-claim #Verweis auf den PersistentVolume
 ---
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
@@ -66,7 +169,7 @@ spec:
       volumes:
       - name: "apache-data"
         persistentVolumeClaim:
-          claimName: apache-data #Verweis auf den PersistentVolume
+          claimName: data-claim #Verweis auf den PersistentVolume
 ---
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
@@ -100,7 +203,7 @@ spec:
       volumes:
       - name: "phpmyadmin-data"
         persistentVolumeClaim:
-          claimName: phpmyadmin-data  #Verweis auf den PersistentVolume
+          claimName: data-claim  #Verweis auf den PersistentVolume
 ---
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
@@ -132,4 +235,4 @@ spec:
       volumes:
       - name: "jupyter-data" # Volumesbeschreibung
         persistentVolumeClaim: 
-          claimName: jupyter-data  
+          claimName: data-claim  
