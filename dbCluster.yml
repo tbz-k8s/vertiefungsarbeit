@@ -1,0 +1,188 @@
+apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: db-module-mariadb
+  labels:
+    app: mariadb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mariadb
+  template:
+    metadata:
+      labels:
+        app: mariadb
+    spec:
+      containers:
+        - image: mariadb:10.4 #Version des Images für Apache
+          name: mariadb
+          ports:
+            - containerPort: 3306 #Ports auf denen MariaDB ansprechbar ist
+              name: maria-zugang
+          # Volumes in Container
+          volumeMounts:
+            - mountPath: / #Rootverzeichniss
+              subPath: mariadb  
+              name: mariadb-data       
+      # Volumes in Host
+      volumes:
+      - name: maria-data
+        persistentVolumeClaim:
+          claimName: data-claim #Verweis auf den PersistentVolume
+---
+apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: web-module-apache
+  labels:
+    app: apache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apache
+  template:
+    metadata:
+      labels:
+        app: apache
+    spec:
+      containers:
+        - image: httpd:2.4 #Version des Images für Apache
+          name: apache
+          ports:
+            - containerPort: 8081 #Ports auf denen Apache ansprechbar ist
+              name: apache-zugang
+          # Volumes in Container
+          volumeMounts:
+            - mountPath: /usr/local/apache2/htdocs/ #Rootverzeichniss
+              subPath: apache  
+              name: apache-data       
+      # Volumes in Host
+      volumes:
+      - name: apache-data
+        persistentVolumeClaim:
+          claimName: data-claim #Verweis auf den PersistentVolume
+---
+apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: web-module-phpmyadmin
+  labels:
+    app: phpmyadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin
+    spec:
+      containers:
+        - image: phpmyadmin/phpmyadmin:4.8 #Version des Images für phpmyadmin
+          name: phpmyadmin
+          ports:
+            - containerPort: 8080 #Ports auf denen phpmyadmin ansprechbar ist
+              name: phpmyadmin
+          env: 
+            - name: PMA_HOST #definieren der MriaDB Server Adresse, hier mit internem DNS Namen
+              value: "mariadb"
+      # Volumes in Container
+          volumeMounts:
+            - mountPath: /etc/phpmyadmin/config.user.inc.php     # Configfile siehe https://hub.docker.com/r/phpmyadmin/phpmyadmin/ 
+              subPath: myphpadmin
+              name: phpmyadmin-data 
+      #Volumes in Host
+      volumes:
+      - name: phpmyadmin-data
+        persistentVolumeClaim:
+          claimName: data-claim  #Verweis auf den PersistentVolume
+---
+apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: web-module-beakerx
+  labels:
+    app: beakerx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: beakerx
+  template:
+    metadata:
+      labels:
+        app: beakerx
+    spec:
+      containers:
+        - image:  dqgaetan/beakerx:v1.0 #Version des Images für beakerx
+          name: beakerx
+          command: [ "start-notebook.sh", "--NotebookApp.token=''" ]
+          ports: 
+            - containerPort: 8888 #Ports auf denen Beakerx / Jupyter ansprechbar ist
+              name: beakerx
+          # Volumes in Container          
+          volumeMounts:
+          -  mountPath: /home/beakerx   #Notebooks und Settings
+             subPath: beakerx
+             name: jupyter-data
+          # Volumes in Host
+      volumes:
+      - name: jupyter-data # Volumesbeschreibung
+        persistentVolumeClaim: 
+          claimName: data-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: beakerx
+spec:
+  type: LoadBalancer
+  selector:
+    app: beakerx
+  ports:
+     - port: 8888
+       protocol: TCP
+       targetPort: 8888
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: phpmyadmin
+spec:
+  type: LoadBalancer
+  selector:
+    app: phpmyadmin
+  ports:
+    -  port: 8080
+       protocol: TCP  
+       targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb
+spec:
+  type: LoadBalancer
+  selector:
+    app: mariadb
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apache
+spec:
+  type: LoadBalancer
+  selector:
+    app: apache
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8081  
+
