@@ -126,7 +126,7 @@ spec:
         app: beakerx
     spec:
       containers:
-        - image:  dqgaetan/beakerx:v1.0 #Version des Images für beakerx
+        - image:  beakerx/beakerx #Version des Images für beakerx
           name: beakerx
           command: [ "start-notebook.sh", "--NotebookApp.token=''" ]
           ports: 
@@ -134,7 +134,7 @@ spec:
               name: beakerx
           # Volumes in Container          
           volumeMounts:
-          -  mountPath: /home/beakerx   #Notebooks und Settings
+          -  mountPath: /home/beakerx/work   #Notebooks und Settings
              subPath: beakerx
              name: jupyter-data
           # Volumes in Host
