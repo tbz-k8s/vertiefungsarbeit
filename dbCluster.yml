@@ -43,7 +43,7 @@ spec:
             value: beakerx
             # Volumes in Container
           volumeMounts:
-            - mountPath: / #Rootverzeichniss
+            - mountPath: /var/lib/mysql #Rootverzeichniss
               subPath: mariadb  
               name: mariadb-data       
       # Volumes in Host
