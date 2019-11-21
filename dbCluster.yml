@@ -36,7 +36,7 @@ spec:
               name: mariadb-data       
       # Volumes in Host
       volumes:
-      - name: maria-data
+      - name: mariadb-data
         persistentVolumeClaim:
           claimName: data-claim #Verweis auf den PersistentVolume
 ---
