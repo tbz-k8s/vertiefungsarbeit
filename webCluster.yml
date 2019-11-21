@@ -84,7 +84,7 @@ spec:
         app: beakerx
     spec:
       containers:
-        - image:  dqgaetan/beakerx:v1.0 #Version des Images für beakerx
+        - image:  beakerx/beakerx #Version des Images für beakerx
           name: beakerx
           command: [ "start-notebook.sh", "--NotebookApp.token=''" ]
           ports: 
@@ -126,19 +126,6 @@ spec:
     -  port: 8080
        protocol: TCP  
        targetPort: 8080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mariadb
-spec:
-  type: LoadBalancer
-  selector:
-    app: mariadb
-  ports:
-    - protocol: TCP
-      port: 3306
-      targetPort: 3306
 ---
 apiVersion: v1
 kind: Service
