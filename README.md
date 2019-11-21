@@ -46,7 +46,7 @@ Im Gegensatz zum Cluster in dem die Volumes bzw Shares im selben File (https://g
 
 Hier sind die Persistant Volumes in einer eigenen YAML-Datei (https://github.com/zoink1989/vertiefungsarbeit/blob/master/localVolumes.yml) hinterlegt und die Anleitung für die weiteren Deployments in der entsprechenden Datei web.yml (https://github.com/zoink1989/vertiefungsarbeit/blob/master/web.yml).
 
-## Wartung
+## Wartung Schülerinstanzen
 
 Grundsätzlich brauchen die Systeme welche im Kubernetescluster aufgezogen werden keine Wartung, da diese am Ende der Module einfach gelöscht und auf Knopfdruck wieder neu gebaut werden. 
 
@@ -81,7 +81,6 @@ Im Falle einer Inkompatibilität (zB von PHP Version mit aktuelleren Syntax) ist
 
 Kontakt: marcel.bernet@tbz.ch
 
-
 # Komponenten der Module
 
 ## Webtechnologieen
@@ -115,6 +114,8 @@ Aufgrund der praktischen Umsetzung des Zugriffs auf die Datenablage, empfiehlt e
 
 Konzeptionell sieht das Modul folgendermassen aus. 
 ![](bilder/Übersicht_Schülerumgebung_DB.png)
+
+
 
 # Jupyter / BeakerX
 
