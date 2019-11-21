@@ -55,7 +55,7 @@ spec:
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
 metadata:
-  name: web-module-apache
+  name: db-module-apache
   labels:
     app: apache
 spec:
@@ -88,7 +88,7 @@ spec:
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
 metadata:
-  name: web-module-phpmyadmin
+  name: db-module-phpmyadmin
   labels:
     app: phpmyadmin
 spec:
@@ -124,7 +124,7 @@ spec:
 apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
 metadata:
-  name: web-module-beakerx
+  name: db-module-beakerx
   labels:
     app: beakerx
 spec:
