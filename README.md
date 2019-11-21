@@ -46,7 +46,7 @@ Im Gegensatz zum Cluster in dem die Volumes bzw Shares im selben File (https://g
 
 Hier sind die Persistant Volumes in einer eigenen YAML-Datei (https://github.com/zoink1989/vertiefungsarbeit/blob/master/localVolumes.yml) hinterlegt und die Anleitung für die weiteren Deployments in der entsprechenden Datei web.yml (https://github.com/zoink1989/vertiefungsarbeit/blob/master/web.yml).
 
-## Wartung
+## Wartung Schülerinstanzen
 
 Grundsätzlich brauchen die Systeme welche im Kubernetescluster aufgezogen werden keine Wartung, da diese am Ende der Module einfach gelöscht und auf Knopfdruck wieder neu gebaut werden. 
 
@@ -69,10 +69,17 @@ Hierzu wurde in Ablauf definiert der durch den Modulverantwortlichen so durchgef
 4. Unterrichtsinstanzen vernichten
 5. Verbesserungsvorschläge zusammentragen
 6. Anpassungen vornehmen
-7. Anpassungen Testen
+7. Anpassungen Testen und übergeben
 
 
-### Zuständigkeiten
+### Zuständigkeiten
+
+<b>Lehrmittel als Notebook: </b> Lehrpersonen 
+<b>Basis und Infrastruktur: </b> Marcel Bernet
+
+Im Falle einer Inkompatibilität (zB von PHP Version mit aktuelleren Syntax) ist Marcel Bernel die Verantwortliche Person der die Services resp. Containerversionen anpassen muss. Das selbe gilt für die Module im Rahmen des Lernkube, da diese technische auf dem selben Fundament basieren. 
+
+Kontakt: marcel.bernet@tbz.ch
 
 # Komponenten der Module
 
@@ -108,12 +115,13 @@ Aufgrund der praktischen Umsetzung des Zugriffs auf die Datenablage, empfiehlt e
 Konzeptionell sieht das Modul folgendermassen aus. 
 ![](bilder/Übersicht_Schülerumgebung_DB.png)
 
+
+
 # Jupyter / BeakerX
 
 Eine Anwendung die wohl für alle komplett neu sein dürfte ist Jupyter Notebook. Jupyter ist eine Anwendung welche für die Auswertung von Daten in Wissenschaftlichen Daten entwickelt wurde und bassiert auf Phyton. Hierzu hat jemand verschiedene Kernels entwickelt welche andere Programmiersprachen unterstützen. Darunter auch SQL.
 
+Weitere Infos unter: https://jupyter-notebook.readthedocs.io/en/stable/
 
-
-https://jupyter-notebook.readthedocs.io/en/stable/
-https://github.com/twosigma/beakerx
-SQL https://github.com/twosigma/beakerx/blob/69cf4d47d623dcb10087d6962808d020b9bf01f9/doc/sql/Sql.ipynb
+An diesem Punkt wechseln wir in den Lernkube. Diesen findet ihr unter https://github.com/mc-b/lernkube
+Die Dokumenation für Jupyter resp. BeakerX sowie Ideen wie man diesen im Unterricht einsetzt, findet ihr sobald ich den Lernkube in Betrieb habt unter http://localhost:8888/tree/work
