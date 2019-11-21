@@ -83,7 +83,7 @@ Hierzu wurde in Ablauf definiert der durch den Modulverantwortlichen so durchgef
 | ------------ |:------------------:| -------------:|------------------- |:------------------:| ------:|
 | httpd | Apache | 2.4 | 8081 | /usr/local/apache2/htdocs/ | Rootverzeichniss |
 | phpmyadmin/phpmyadmin |  PHPmyAdmin | 4.8 | 8080 | /etc/phpmyadmin/config.user.inc.php | Configfile |
-| beakerx/beakerx | Jupyter / Beakerx | 1.3 | 80 | /mnt/mesos/sandbox  | Notebooks und Einstellungen |
+| beakerx/beakerx | Jupyter / Beakerx | 1.3 | 8888 | /mnt/mesos/sandbox  | Notebooks und Einstellungen |
 
 #### Architektur
 
@@ -99,7 +99,7 @@ Aufgrund der praktischen Umsetzung des Zugriffs auf die Datenablage, empfiehlt e
 | ------------ |:------------------:| -------------:|------------------- |:------------------:| ------:|
 | httpd | Apache | 2.4 | 8081 | /usr/local/apache2/htdocs/ | Rootverzeichniss |
 | phpmyadmin/phpmyadmin |  PHPmyAdmin | 4.8 | 8080 | /etc/phpmyadmin/config.user.inc.php | Configfile |
-| beakerx/beakerx | Jupyter / Beakerx | 1.3 | 80 | /mnt/mesos/sandbox  | Notebooks und Einstellungen |
+| beakerx/beakerx | Jupyter / Beakerx | 1.3 | 8888 | /home/beakerx/work  | Notebooks und Einstellungen |
 | mariadb/mariadb | MariaDB |4.10.4 | 3306 | /usr/local/mariadb/columnstore | Datenbanken (sowohl intern wie auch extern) |
 
 #### Architektur
@@ -110,7 +110,8 @@ Konzeptionell sieht das Modul folgendermassen aus.
 
 # Jupyter / BeakerX
 
-Eine Anwendung die wohl für alle komplett neu sein dürfte ist Jupyter Notebook. Jupyter ist eine Anwendung welche für 
+Eine Anwendung die wohl für alle komplett neu sein dürfte ist Jupyter Notebook. Jupyter ist eine Anwendung welche für die Auswertung von Daten in Wissenschaftlichen Daten entwickelt wurde und bassiert auf Phyton. Hierzu hat jemand verschiedene Kernels entwickelt welche andere Programmiersprachen unterstützen. Darunter auch SQL.
+
 
 
 https://jupyter-notebook.readthedocs.io/en/stable/
