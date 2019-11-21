@@ -69,10 +69,18 @@ Hierzu wurde in Ablauf definiert der durch den Modulverantwortlichen so durchgef
 4. Unterrichtsinstanzen vernichten
 5. Verbesserungsvorschläge zusammentragen
 6. Anpassungen vornehmen
-7. Anpassungen Testen
+7. Anpassungen Testen und übergeben
 
 
-### Zuständigkeiten
+### Zuständigkeiten
+
+<b>Lehrmittel als Notebook: </b> Lehrpersonen 
+<b>Basis und Infrastruktur: </b> Marcel Bernet
+
+Im Falle einer Inkompatibilität (zB von PHP Version mit aktuelleren Syntax) ist Marcel Bernel die Verantwortliche Person der die Services resp. Containerversionen anpassen muss. Das selbe gilt für die Module im Rahmen des Lernkube, da diese technische auf dem selben Fundament basieren. 
+
+Kontakt: marcel.bernet@tbz.ch
+
 
 # Komponenten der Module
 
