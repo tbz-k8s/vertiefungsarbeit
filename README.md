@@ -121,8 +121,7 @@ Konzeptionell sieht das Modul folgendermassen aus.
 
 Eine Anwendung die wohl für alle komplett neu sein dürfte ist Jupyter Notebook. Jupyter ist eine Anwendung welche für die Auswertung von Daten in Wissenschaftlichen Daten entwickelt wurde und bassiert auf Phyton. Hierzu hat jemand verschiedene Kernels entwickelt welche andere Programmiersprachen unterstützen. Darunter auch SQL.
 
+Weitere Infos unter: https://jupyter-notebook.readthedocs.io/en/stable/
 
-
-https://jupyter-notebook.readthedocs.io/en/stable/
-https://github.com/twosigma/beakerx
-SQL https://github.com/twosigma/beakerx/blob/69cf4d47d623dcb10087d6962808d020b9bf01f9/doc/sql/Sql.ipynb
+An diesem Punkt wechseln wir in den Lernkube. Diesen findet ihr unter https://github.com/mc-b/lernkube
+Die Dokumenation für Jupyter resp. BeakerX sowie Ideen wie man diesen im Unterricht einsetzt, findet ihr sobald ich den Lernkube in Betrieb habt unter http://localhost:8888/tree/work
