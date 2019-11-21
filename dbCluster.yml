@@ -152,7 +152,7 @@ kind: Service
 metadata:
   name: mariadb
 spec:
-  type: LoadBalancer
+#  type: LoadBalancer
   selector:
     app: mariadb
   ports:
