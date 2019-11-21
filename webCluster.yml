@@ -104,7 +104,7 @@ spec:
               name: beakerx
           # Volumes in Container          
           volumeMounts:
-          -  mountPath: /home/beakerx   #Notebooks und Settings
+          -  mountPath: /home/beakerx/work   #Notebooks und Settings
              subPath: beakerx
              name: jupyter-data
           # Volumes in Host
