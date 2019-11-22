@@ -40,11 +40,19 @@ Entsprechend sind alle Lehrpersonen selbst für die bereitstellung der Module au
 
 ## Lernkube
 
-Die Umgebung auf dem Lernkube (https://github.com/mc-b/lernkube) ist analog der des Kubernetesclusters funktional identisch. Ausnahme hier ist lediglich die Ablage der Daten welche in der Clustervariante schlussendlich auf NFS Ferigaben schrieben und im Lernkube einen Speicherort in der Vagrant Maschine finden. Diese sind abgreif- und veränderbar und unter dem Pfad "/data" auffindbar. 
+Die Umgebung auf dem Lernkube (https://github.com/mc-b/lernkube) ist analog der des Kubernetesclusters funktional identisch. Ausnahme hier ist lediglich die Ablage der Daten welche in der Clustervariante schlussendlich auf NFS Freigaben schreiben und im Lernkube einen Speicherort in der Vagrant Maschine finden. Diese sind abgreif- und veränderbar und unter dem Pfad "/data" auffindbar. 
 
-Im Gegensatz zum Cluster in dem die Volumes bzw Shares im selben File (https://github.com/zoink1989/vertiefungsarbeit/blob/master/web.yml) beschrieben ist, ist dies in der lokalen Variante verschieden. 
+Die technische Spezifizierung und Bauanleitung für die Umgebungen finden sich in diesen YAML-Files. Diese beschreiben den SOLL Zustand der Umgebungen. Diese greiffen sowohl im Lernkube wie auch im Cluster auf idenische Schnittstellen nach Aussen zu, wie diese dann die Volumes zur Verfügung stellen ist jedoch wieder anders. 
 
-Hier sind die Persistant Volumes in einer eigenen YAML-Datei (https://github.com/zoink1989/vertiefungsarbeit/blob/master/localVolumes.yml) hinterlegt und die Anleitung für die weiteren Deployments in der entsprechenden Datei web.yml (https://github.com/zoink1989/vertiefungsarbeit/blob/master/web.yml).
+Der Lernkube bindet die Daten zwischen Benutzer und dem Verzeichnis /Lernkube/data/<Anwendungsverzeichniss> wogegen der Cluster diese Verbindung auf eine lokale Ablage auf dem Filesystem des Clusters selber herstellt. Diese ist zwar persistent, aber in erster Linie nicht erreichbar (Die Daten können idR über die Anwendungen mit denen Sie bearbeitet werden exportiert werden).
+
+DB Module
+https://github.com/zoink1989/vertiefungsarbeit/blob/master/dbCluster.yml
+
+Web Module
+https://github.com/zoink1989/vertiefungsarbeit/blob/master/webCluster.yml
+
+Das heisst, dass wenn die Daten in Rohform bearbeitbar sein sollten, würde sich eine lokale Anwendung eher empfehlen als im CLuster. 
 
 ## Wartung Schülerinstanzen
 
