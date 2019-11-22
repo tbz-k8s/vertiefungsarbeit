@@ -133,4 +133,4 @@ Eine Anwendung die wohl für alle komplett neu sein dürfte, ist Jupyter Noteboo
 Weitere Infos unter: https://jupyter-notebook.readthedocs.io/en/stable/
 
 An diesem Punkt wechseln wir in den Lernkube. Diesen findet ihr unter https://github.com/mc-b/lernkube
-Die Dokumenation für Jupyter resp. BeakerX sowie Ideen wie man diesen im Unterricht einsetzt, findet ihr sobald ich den Lernkube in Betrieb habt unter http://localhost:8888/tree/work.
+Die Dokumenation für Jupyter resp. BeakerX sowie Ideen wie man diesen im Unterricht einsetzt, findet ihr sobald ich den Lernkube in Betrieb habt unter http://localhost:8888/tree/work und über die Upload Funktion das https://github.com/zoink1989/vertiefungsarbeit/blob/master/01_01_Einfu%CC%88hrung_LP.ipynb  File hineinlädt.
