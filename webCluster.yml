@@ -118,7 +118,6 @@ kind: Service
 metadata:
   name: beakerx
 spec:
-  type: LoadBalancer
   selector:
     app: beakerx
   ports:

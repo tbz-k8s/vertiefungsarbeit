@@ -127,7 +127,6 @@ kind: Service
 metadata:
   name: beakerx
 spec:
-  type: LoadBalancer
   selector:
     app: beakerx
   ports:
@@ -140,7 +139,6 @@ kind: Service
 metadata:
   name: phpmyadmin
 spec:
-  type: LoadBalancer
   selector:
     app: phpmyadmin
   ports:
@@ -152,7 +150,6 @@ kind: Service
 metadata:
   name: mariadb
 spec:
-#  type: LoadBalancer
   selector:
     app: mariadb
   ports:
