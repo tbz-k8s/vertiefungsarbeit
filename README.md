@@ -113,7 +113,7 @@ Aufgrund der praktischen Umsetzung des Zugriffs auf die Datenablage, empfiehlt e
 
 
 Konzeptionell sieht das Modul folgendermassen aus. 
-#![](bilder/Übersicht_Schülerumgebung_DB.png)
+![](https://github.com/zoink1989/vertiefungsarbeit/blob/master/bilder/U%CC%88bersicht_Schu%CC%88lerumgebung_DB.png)
 
 
 
