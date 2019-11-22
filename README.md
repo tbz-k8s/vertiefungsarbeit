@@ -91,6 +91,7 @@ Kontakt: marcel.bernet@tbz.ch
 | httpd | Apache | 2.4 | 8081 | /usr/local/apache2/htdocs/ | Rootverzeichniss |
 | phpmyadmin/phpmyadmin |  PHPmyAdmin | 4.8 | 8080 | /etc/phpmyadmin/config.user.inc.php | Configfile |
 | beakerx/beakerx | Jupyter / Beakerx | 1.3 | 8888 | /home/beakerx/work  | Notebooks und Einstellungen |
+| mariadb/mariadb | MariaDB |4.10.4 | 3306 | /usr/local/mariadb/columnstore | Datenbanken (sowohl intern wie auch extern) |
 
 #### Architektur
 
