@@ -113,6 +113,49 @@ spec:
         persistentVolumeClaim: 
           claimName: data-claim
 ---
+---
+apiVersion: apps/v1  # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: web-module-mariadb
+  labels:
+    app: mariadb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mariadb
+  template:
+    metadata:
+      labels:
+        app: mariadb
+    spec:
+      containers:
+        - image: mariadb:10.4 #Version des Images für Apache
+          name: mariadb
+          ports:
+            - containerPort: 3306 #Ports auf denen MariaDB ansprechbar ist
+              name: maria-zugang
+          env: 
+          - name: MYSQL_DATABASE
+            value: db
+          - name: MYSQL_ROOT_PASSWORD
+            value: beakerx
+          - name: MYSQL_USER
+            value: beakerx
+          - name: MYSQL_PASSWORD
+            value: beakerx
+            # Volumes in Container
+          volumeMounts:
+            - mountPath: /var/lib/mysql/columnstore #Rootverzeichniss
+              subPath: mariadb  
+              name: mariadb-data 
+      # Volumes in Host
+      volumes:
+      - name: mariadb-data
+        persistentVolumeClaim:
+          claimName: data-claim #Verweis auf den PersistentVolume
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -150,4 +193,17 @@ spec:
     - protocol: TCP
       port: 8081
       targetPort: 8081  
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb
+spec:
+  selector:
+    app: mariadb
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+
 
