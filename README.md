@@ -6,7 +6,7 @@ In der heutigen Zeit, in der sich Technologien rasend weiterentwickeln und weite
 Schule. Gerade die Arbeit in der Informatik bietet viele Stolperfallen im Sinne der Vorbereitung und der Systemkompatibilität über alle Hersteller und möglichst vielen Variationen von Systemen. Dazu
 kommt, dass die Vorbereitung von Inhalten abhängig von Technologien und dessen Versionen ist, was die Herausforderung stellt ein homogenes System zu stellen, welches über alle Systeme und Versionen hinweg identisch anzuwenden ist.
 
-Deswegen wurde im Rahmen der Vertiefungsarbeite der TBZ HF ITSE17 eine Variante umgesetzt in der sichergestellt ist das die Bereitstellung der Lernumgebung Fehlerfrei und Einheitlich erfolgt, ohne grossen Aufwand betreiben zu müssen. 
+Deswegen wurde im Rahmen der Vertiefungsarbeite der TBZ HF ITSE17 eine Variante umgesetzt in der sichergestellt ist, dass die Bereitstellung der Lernumgebung fehlerfrei und eEinheitlich erfolgt, ohne grossen Aufwand betreiben zu müssen. 
 
 Dieses Repository ist als Erklärung und Anleitung für Lehrpersonen zu verstehen und soll ebenalls den technischen Einblick gewähren um selbst solche Module zu bauen. Dies baut im wesentlichen auf dem M300 von Marcel Bernet auf dem Github Repository https://www.github.com/mc-b/lernkube dessen Erläuterungen zu Containerisierung und Orchestrierung hier verlinkt sind.  
 
@@ -14,8 +14,8 @@ Dieses Repository ist als Erklärung und Anleitung für Lehrpersonen zu verstehe
 
 ## Technologie
 
-Die hierfür verwendete Technologie basiert grundlegend auf Containerisierung (https://github.com/mc-b/M300/tree/master/30-Container)  welche mit Orchestrierungssoftware (in diesem Fall Kubernetes (https://github.com/mc-b/M300/tree/master/40-Kubernetes) aufgezogen und betrieben wird. 
-Der Vorteil hier liegt auf der Hand: Die Umgebung welche für die Schüler eingerichtet werden muss, Beispielsweise im einem Datenbank Modul (mit einem Webserver, einer MySQL Datenbank, und einer phpMyAdmin Oberfläche) ist an sich komplett vorgegeben. Die Vorlage hierfür liegt auf einem Repository, in diesem Fall dieser hier, und wird von der Clustern über die Oberfläche einfach angewendet, immer mit der selben Verison inkl. deren Eigenheiten. Das heisst das man den Problemen einer klassischen Schulumgebung in denen jeder Schüler selbst eine XAMPP Version installiert, je nach Zeitpunkt des Download eine Abweichende Version haben könnte.
+Die hierfür verwendete Technologie basiert grundlegend auf Containerisierung (https://github.com/mc-b/M300/tree/master/30-Container), welche mit Orchestrierungssoftware (in diesem Fall Kubernetes (https://github.com/mc-b/M300/tree/master/40-Kubernetes) aufgezogen und betrieben wird. 
+Der Vorteil hier liegt auf der Hand: Die Umgebung welche für die Schüler eingerichtet werden muss, beispielsweise im einem Datenbank Modul (mit einem Webserver, einer MySQL Datenbank und einer phpMyAdmin Oberfläche) ist an sich komplett vorgegeben. Die Vorlage hierfür liegt auf einem Repository - in diesem Fall dieser hier - und wird von der Clustern über die Oberfläche einfach angewendet, immer mit der selben Verison inklusive deren Eigenheiten. Das bedeutet, dass man den Problemen einer klassischen Schulumgebung in denen jeder Schüler selbst eine XAMPP Version installiert, je nach Zeitpunkt des Download eine abweichende Version haben könnte.
 
 Zusätzlich zu der Bereitstellung der Software für die praktische Arbeit, wird ebenfalls Jupyter Notebooks berietgestellt. Hierbei handelt es sich um eine Webapplikation die in den entsprechenden Modulen enhalten ist, welche die Scripts beherbergen soll. Jupyter ermöglicht Code Live auszuführen, das heisst dass ich einerseits theoretische Inputs wie in einem PDF beschreiben kann, aber ebenfalls ein Eingabefeld bereitsstellt in dem der Schüler das beschrieben direkt anwendet. 
 
@@ -42,9 +42,9 @@ Entsprechend sind alle Lehrpersonen selbst für die bereitstellung der Module au
 
 Die Umgebung auf dem Lernkube (https://github.com/mc-b/lernkube) ist analog der des Kubernetesclusters funktional identisch. Ausnahme hier ist lediglich die Ablage der Daten welche in der Clustervariante schlussendlich auf NFS Freigaben schreiben und im Lernkube einen Speicherort in der Vagrant Maschine finden. Diese sind abgreif- und veränderbar und unter dem Pfad "/data" auffindbar. 
 
-Die technische Spezifizierung und Bauanleitung für die Umgebungen finden sich in diesen YAML-Files. Diese beschreiben den SOLL Zustand der Umgebungen. Diese greiffen sowohl im Lernkube wie auch im Cluster auf idenische Schnittstellen nach Aussen zu, wie diese dann die Volumes zur Verfügung stellen ist jedoch wieder anders. 
+Die technische Spezifizierung und Bauanleitung für die Umgebungen finden sich in diesen YAML-Files. Diese beschreiben den SOLL Zustand der Umgebungen. Sie greifen sowohl im Lernkube wie auch im Cluster auf identische Schnittstellen nach Aussen zu. Wie diese dann die Volumes zur Verfügung stellen, ist jedoch wieder anders. 
 
-Der Lernkube bindet die Daten zwischen Benutzer und dem Verzeichnis /Lernkube/data/<Anwendungsverzeichniss> wogegen der Cluster diese Verbindung auf eine lokale Ablage auf dem Filesystem des Clusters selber herstellt. Diese ist zwar persistent, aber in erster Linie nicht erreichbar (Die Daten können idR über die Anwendungen mit denen Sie bearbeitet werden exportiert werden).
+Der Lernkube bindet die Daten zwischen Benutzer und dem Verzeichnis /Lernkube/data/<Anwendungsverzeichniss> wogegen der Cluster diese Verbindung auf eine lokale Ablage auf dem Filesystem des Clusters selber herstellt. Diese ist zwar persistent, aber in erster Linie nicht erreichbar (Die Daten können idR über die Anwendungen, mit denen Sie bearbeitet werden, exportiert werden).
 
 DB Module
 https://github.com/zoink1989/vertiefungsarbeit/blob/master/dbCluster.yml
@@ -52,7 +52,7 @@ https://github.com/zoink1989/vertiefungsarbeit/blob/master/dbCluster.yml
 Web Module
 https://github.com/zoink1989/vertiefungsarbeit/blob/master/webCluster.yml
 
-Das heisst, dass wenn die Daten in Rohform bearbeitbar sein sollten, würde sich eine lokale Anwendung eher empfehlen als im CLuster. 
+Das heisst, dass wenn die Daten in Rohform bearbeitbar sein sollten, würde sich eine lokale Anwendung eher empfehlen, als eine Anwendung im Cluster. 
 
 ## Wartung Schülerinstanzen
 
@@ -60,9 +60,9 @@ Grundsätzlich brauchen die Systeme welche im Kubernetescluster aufgezogen werde
 
 ## Weiterentwicklung und Lifecycle
 
-Einzig die Versionen der Software kann angepasst werden, jedoch ist dies nicht zu unterschätzen da je Abhängigkeiten in Scripts welche den Schülern verteilt werden hier tangiert werden.
+Einzig die Versionen der Software kann angepasst werden. Dies ist jedoch nicht zu unterschätzen da je Abhängigkeiten in Scripts, welche den Schülern verteilt werden, hier tangiert werden.
 
-Hierzu wurde in Ablauf definiert der durch den Modulverantwortlichen so durchgeführt wird und von den Lehrpersonen gegenprüfen lässt. Da die Changes erst ende Semester angedacht ist, empfiehlt es sich die Änderungen genau zu prüfen. 
+Hierzu wurde ein Ablauf definiert, der durch den Modulverantwortlichen durchgeführt und von den Lehrpersonen gegengeprüft wird. Da die Changes erst Ende Semester angedacht sind, empfiehlt es sich die Änderungen genau zu prüfen. 
 
 
 ![Ablauf Renewal](bilder/Renewal_Phase-unerwuenscht1.png)
@@ -85,7 +85,7 @@ Hierzu wurde in Ablauf definiert der durch den Modulverantwortlichen so durchgef
 <b>Lehrmittel als Notebook: </b> Lehrpersonen 
 <b>Basis und Infrastruktur: </b> Marcel Bernet
 
-Im Falle einer Inkompatibilität (zB von PHP Version mit aktuelleren Syntax) ist Marcel Bernel die Verantwortliche Person der die Services resp. Containerversionen anpassen muss. Das selbe gilt für die Module im Rahmen des Lernkube, da diese technische auf dem selben Fundament basieren. 
+Im Falle einer Inkompatibilität (z. B. wegen einer PHP Version mit aktuellerem Syntax) ist Marcel Bernel die verantwortliche Person, die die Services respektive Containerversionen anpassen muss. Das selbe gilt für die Module im Rahmen des Lernkube, da diese technisch auf dem selben Fundament basieren. 
 
 Kontakt: marcel.bernet@tbz.ch
 
@@ -103,10 +103,10 @@ Kontakt: marcel.bernet@tbz.ch
 
 #### Architektur
 
-Konzeptionell sieht das Modul folgendermassen aus. 
+Konzeptionell sieht das Modul folgendermassen aus: 
 #![](https://github.com/zoink1989/vertiefungsarbeit/blob/master/bilder/U%CC%88bersicht_Schu%CC%88lerumgebung_WEB.png)
 
-Aufgrund der praktischen Umsetzung des Zugriffs auf die Datenablage, empfiehlt es sich die produktiven Teile der Aufgaben wie Beispielsweise entwickeln und testen von PHP Code auf dem lokalen Lernkube. Der lokale Pfad für den Austausch der Daten, explizit der "htdoc" Grundordner lautet: "/data/apache" im Lernkube.
+Aufgrund der praktischen Umsetzung des Zugriffs auf die Datenablage, empfiehlt es sich die produktiven Teile der Aufgaben, wie beispielsweise Entwickeln und Testen von PHP Code, auf dem lokalen Lernkube durchzuführen. Der lokale Pfad für den Austausch der Daten, explizit der "htdoc" Grundordner, lautet: "/data/apache" im Lernkube.
 
 ## Datenbanken 
 ### Übersicht
@@ -128,7 +128,7 @@ Konzeptionell sieht das Modul folgendermassen aus.
 
 # Jupyter / BeakerX
 
-Eine Anwendung die wohl für alle komplett neu sein dürfte ist Jupyter Notebook. Jupyter ist eine Anwendung welche für die Auswertung von Daten in Wissenschaftlichen Daten entwickelt wurde und bassiert auf Phyton. Hierzu hat jemand verschiedene Kernels entwickelt welche andere Programmiersprachen unterstützen. Darunter auch SQL.
+Eine Anwendung die wohl für alle komplett neu sein dürfte, ist Jupyter Notebook. Jupyter ist eine Anwendung, welche für die Auswertung und Visualisierung von wissenschaftlichen Daten entwickelt wurde und basiert auf Phyton. Hierzu hat jemand verschiedene Kernels entwickelt welche andere Programmiersprachen unterstützen. Darunter auch SQL.
 
 Weitere Infos unter: https://jupyter-notebook.readthedocs.io/en/stable/
 
