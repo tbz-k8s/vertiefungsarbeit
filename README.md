@@ -17,15 +17,15 @@ Dieses Repository ist als Erklärung und Anleitung für Lehrpersonen zu verstehe
 Die hierfür verwendete Technologie basiert grundlegend auf Containerisierung (https://github.com/mc-b/M300/tree/master/30-Container), welche mit Orchestrierungssoftware (in diesem Fall Kubernetes (https://github.com/mc-b/M300/tree/master/40-Kubernetes) aufgezogen und betrieben wird. 
 Der Vorteil hier liegt auf der Hand: Die Umgebung welche für die Schüler eingerichtet werden muss, beispielsweise im einem Datenbank Modul (mit einem Webserver, einer MySQL Datenbank und einer phpMyAdmin Oberfläche) ist an sich komplett vorgegeben. Die Vorlage hierfür liegt auf einem Repository - in diesem Fall dieser hier - und wird von der Clustern über die Oberfläche einfach angewendet, immer mit der selben Verison inklusive deren Eigenheiten. Das bedeutet, dass man den Problemen einer klassischen Schulumgebung in denen jeder Schüler selbst eine XAMPP Version installiert, je nach Zeitpunkt des Download eine abweichende Version haben könnte.
 
-Zusätzlich zu der Bereitstellung der Software für die praktische Arbeit, wird ebenfalls Jupyter Notebooks berietgestellt. Hierbei handelt es sich um eine Webapplikation die in den entsprechenden Modulen enhalten ist, welche die Scripts beherbergen soll. Jupyter ermöglicht Code Live auszuführen, das heisst dass ich einerseits theoretische Inputs wie in einem PDF beschreiben kann, aber ebenfalls ein Eingabefeld bereitsstellt in dem der Schüler das beschrieben direkt anwendet. 
+Zusätzlich zu der Bereitstellung der Software für die praktische Arbeit, wird ebenfalls Jupyter Notebooks bereitgestellt. Hierbei handelt es sich um eine Webapplikation, die in den entsprechenden Modulen enhalten ist, welche die Scripts beherbergen soll. Jupyter ermöglicht Code Live auszuführen, das heisst, dass ich einerseits theoretische Inputs wie in einem PDF beschreiben kann, aber ebenfalls ein Eingabefeld bereitstelle, in dem der Schüler das beschriebene direkt anwenden kann. 
 
-Grundsätzlcih ist es hier auch möglich eine Datenbank im Einführungsteil also zu erstellen, tables zu erstellen und Daten einzufüllen - und zur Kontrolle mit einem phpMyAdmin oder der MySQL Workbench die Auswirkungen live mitzuverfolgen. 
+Grundsätzlich ist es auch hier möglich im Einführungsteil eine Datenbank inklusive Tables zu erstellen und Daten einzufüllen - und zur Kontrolle mit einem phpMyAdmin oder der MySQL Workbench die Auswirkungen live mitzuverfolgen. 
 
 # Vogelperspektive Anwendungskonzept
 ##  Cluster
 
-Auf den Clustern welche der Schule zur Verfügung stehen werden die Lernumgebungen betrieben. Für den Zugang auf die Daten, wie es zB beim Modul der Webentwicklung nützlich ist, wird auf die NFS Freigabe zugegriffen um Dateien zu platzieren die dann durch den Server angezeigt werden. 
-Entsprechend sind alle Lehrpersonen selbst für die bereitstellung der Module auf ihrem Cluster zuständig. Dies ist jedoch durch die Verteifungsarbeit eines anderen Schülers realisiert und vereinfacht. 
+Auf den Clustern, welche der Schule zur Verfügung stehen, werden die Lernumgebungen betrieben. Für den Zugang auf die Daten, wie es z. B. beim Modul der Webentwicklung nützlich ist, wird auf die NFS Freigabe zugegriffen um Dateien zu platzieren die dann durch den Server angezeigt werden. 
+Entsprechend sind alle Lehrpersonen selbst für die Bereitstellung der Module auf ihrem Cluster zuständig. Dies wurde jedoch durch die Vertiefungsarbeit eines anderen Schülers realisiert und vereinfacht. 
 
 ![](bilder/semiautomatisiertes_Konzept.png)
 
@@ -40,7 +40,7 @@ Entsprechend sind alle Lehrpersonen selbst für die bereitstellung der Module au
 
 ## Lernkube
 
-Die Umgebung auf dem Lernkube (https://github.com/mc-b/lernkube) ist analog der des Kubernetesclusters funktional identisch. Ausnahme hier ist lediglich die Ablage der Daten welche in der Clustervariante schlussendlich auf NFS Freigaben schreiben und im Lernkube einen Speicherort in der Vagrant Maschine finden. Diese sind abgreif- und veränderbar und unter dem Pfad "/data" auffindbar. 
+Die Umgebung auf dem Lernkube (https://github.com/mc-b/lernkube) ist analog der des Kubernetesclusters funktional identisch. Ausnahme hier ist lediglich die Ablage der Daten, welche in der Clustervariante schlussendlich auf NFS Freigaben schreiben und im Lernkube einen Speicherort in der Vagrant Maschine finden. Diese sind abgreif- und veränderbar und unter dem Pfad "/data" auffindbar. 
 
 Die technische Spezifizierung und Bauanleitung für die Umgebungen finden sich in diesen YAML-Files. Diese beschreiben den SOLL Zustand der Umgebungen. Sie greifen sowohl im Lernkube wie auch im Cluster auf identische Schnittstellen nach Aussen zu. Wie diese dann die Volumes zur Verfügung stellen, ist jedoch wieder anders. 
 
