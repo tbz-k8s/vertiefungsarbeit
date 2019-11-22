@@ -90,12 +90,12 @@ Kontakt: marcel.bernet@tbz.ch
 | ------------ |:------------------:| -------------:|------------------- |:------------------:| ------:|
 | httpd | Apache | 2.4 | 8081 | /usr/local/apache2/htdocs/ | Rootverzeichniss |
 | phpmyadmin/phpmyadmin |  PHPmyAdmin | 4.8 | 8080 | /etc/phpmyadmin/config.user.inc.php | Configfile |
-| beakerx/beakerx | Jupyter / Beakerx | 1.3 | 8888 | /mnt/mesos/sandbox  | Notebooks und Einstellungen |
+| beakerx/beakerx | Jupyter / Beakerx | 1.3 | 8888 | /home/beakerx/work  | Notebooks und Einstellungen |
 
 #### Architektur
 
 Konzeptionell sieht das Modul folgendermassen aus. 
-![](bilder/Übersicht_Schülerumgebung_WEB.png)
+#![](bilder/Übersicht_Schülerumgebung_WEB.png)
 
 Aufgrund der praktischen Umsetzung des Zugriffs auf die Datenablage, empfiehlt es sich die produktiven Teile der Aufgaben wie Beispielsweise entwickeln und testen von PHP Code auf dem lokalen Lernkube. Der lokale Pfad für den Austausch der Daten, explizit der "htdoc" Grundordner lautet: "/data/apache" im Lernkube.
 
@@ -113,7 +113,7 @@ Aufgrund der praktischen Umsetzung des Zugriffs auf die Datenablage, empfiehlt e
 
 
 Konzeptionell sieht das Modul folgendermassen aus. 
-![](bilder/Übersicht_Schülerumgebung_DB.png)
+#![](bilder/Übersicht_Schülerumgebung_DB.png)
 
 
 
