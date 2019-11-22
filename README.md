@@ -95,7 +95,7 @@ Kontakt: marcel.bernet@tbz.ch
 #### Architektur
 
 Konzeptionell sieht das Modul folgendermassen aus. 
-#![](bilder/Übersicht_Schülerumgebung_WEB.png)
+#![](https://github.com/zoink1989/vertiefungsarbeit/blob/master/bilder/U%CC%88bersicht_Schu%CC%88lerumgebung_WEB.png)
 
 Aufgrund der praktischen Umsetzung des Zugriffs auf die Datenablage, empfiehlt es sich die produktiven Teile der Aufgaben wie Beispielsweise entwickeln und testen von PHP Code auf dem lokalen Lernkube. Der lokale Pfad für den Austausch der Daten, explizit der "htdoc" Grundordner lautet: "/data/apache" im Lernkube.
 
