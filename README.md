@@ -125,4 +125,4 @@ Eine Anwendung die wohl für alle komplett neu sein dürfte ist Jupyter Notebook
 Weitere Infos unter: https://jupyter-notebook.readthedocs.io/en/stable/
 
 An diesem Punkt wechseln wir in den Lernkube. Diesen findet ihr unter https://github.com/mc-b/lernkube
-Die Dokumenation für Jupyter resp. BeakerX sowie Ideen wie man diesen im Unterricht einsetzt, findet ihr sobald ich den Lernkube in Betrieb habt unter http://localhost:8888/tree/work
+Die Dokumenation für Jupyter resp. BeakerX sowie Ideen wie man diesen im Unterricht einsetzt, findet ihr sobald ich den Lernkube in Betrieb habt unter http://localhost:8888/tree/work.
